@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/itmecho/bzlmodgotest/proto;proto";
+
+service Test {
+  rpc Get(Empty) returns (Empty);
+}
+
+message Empty {}

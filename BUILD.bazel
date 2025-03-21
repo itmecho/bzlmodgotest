@@ -1,0 +1,25 @@
+load("@gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+gazelle(
+    name = "gazelle",
+    external = "external",
+    prefix = "github.com/itmecho/bzlmodgotest",
+)
+
+go_library(
+    name = "bzlmodgotest_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/itmecho/bzlmodgotest",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_grpc_ecosystem_grpc_gateway_v2//protoc-gen-grpc-gateway",
+        "@com_github_grpc_ecosystem_grpc_gateway_v2//protoc-gen-openapiv2",
+    ],
+)
+
+go_binary(
+    name = "bzlmodgotest",
+    embed = [":bzlmodgotest_lib"],
+    visibility = ["//visibility:public"],
+)
